@@ -1,7 +1,4 @@
-# Assignment 6: Lempel-Ziv Compression
-Name: Asher Etherington\
-Cruz ID: aetherin\
-Class: CSE13s
+# Lempel-Ziv Compression
 
 ## Description:
 This program is used to compress the binary of a file using the Lempel-Ziv compression algorithm so that it is smaller and more manageable. After the file has been compressed/
