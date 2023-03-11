@@ -8,12 +8,11 @@
 //one global buffer for syms and one buffer for bit pairs
 static uint8_t bbuffer[BLOCK];
 static uint8_t sbuffer[BLOCK];
-//ask if these need to be static
 static int sbuffer_index = 0;
 static int sbuffer_end = 0;
 static int bbuffer_index = 0;
 static int bbuffer_end = 0;
-//code for read_bytes supplied by TA Kabir who said that he got it from a different tutor when he took the class
+
 int read_bytes(int infile, uint8_t *buf, int to_read) {
     int batch, total = 0;
     do {
@@ -24,7 +23,7 @@ int read_bytes(int infile, uint8_t *buf, int to_read) {
     } while (batch > 0 && total < to_read);
     return total;
 }
-//code for write_bytes supplied by TA Kabirwho said that he got it from a different tutor when he took the class
+
 int write_bytes(int outfile, uint8_t *buf, int to_write) {
     int batch, total = 0;
     do {
@@ -76,7 +75,7 @@ void write_header(int outfile, FileHeader *header) {
     //write header to outfile
     write_bytes(outfile, buffer, sizeof(FileHeader));
 }
-//increment total syms and maybe bits
+
 bool read_sym(int infile, uint8_t *sym) {
     //if the index is at the end of buffer
     if (sbuffer_index >= sbuffer_end) {
@@ -109,7 +108,6 @@ void write_pair(int outfile, uint16_t code, uint8_t sym, int bitlen) {
             //reset all bits of the buffer to 0
             memset(bbuffer, 0, sizeof(bbuffer));
         }
-        //grab the bit at position i by shifting code (i%16) times and & with (uint16_t)1
         //set bit at next available index of bbuffer
         //check if the bit is a 1 and if so set the bit in buffer
         if ((code >> (i % 16)) & (uint16_t) 1) {
@@ -141,7 +139,6 @@ void flush_pairs(int outfile) {
     }
 }
 
-//similar to write_pair but read from buffer and set bits in code and sym
 bool read_pair(int infile, uint16_t *code, uint8_t *sym, int bitlen) {
     //initialize code and sym to 0
     *code = 0;
@@ -184,7 +181,6 @@ bool read_pair(int infile, uint16_t *code, uint8_t *sym, int bitlen) {
         }
         bbuffer_index++;
     }
-    //printf("code = %u  sym = %c\n", *code, *sym);
     //Check if there are more pairs to read
     if (*code != STOP_CODE) {
         return true;

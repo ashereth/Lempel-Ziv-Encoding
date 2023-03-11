@@ -32,7 +32,6 @@ void trie_reset(TrieNode *root) {
         //if child isnt NULL then loop through its children and set them to null
         if (root->children[i] != NULL) {
             trie_reset(root->children[i]);
-            //maybe this should be trie_delete
             trie_node_delete(root->children[i]);
             root->children[i] = NULL;
         }

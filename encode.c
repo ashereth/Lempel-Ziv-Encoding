@@ -53,7 +53,6 @@ int main(int argc, char **argv) {
         printf("failed to open file\n");
         return 1;
     }
-    //michael helped a lot with figuring out how to get and set header values
     // Get and set header for file
     struct stat file_stats;
     fstat(outfile, &file_stats);
@@ -77,7 +76,6 @@ int main(int argc, char **argv) {
     uint8_t curr_sym = 0;
     uint8_t prev_sym = 0;
     uint16_t next_code = START_CODE;
-    //main loop based of pseudocode
     while (read_sym(infile, &curr_sym)) {
         TrieNode *next_node = trie_step(curr_node, curr_sym);
         if (next_node != NULL) {

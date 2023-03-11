@@ -66,7 +66,6 @@ int main(int argc, char **argv) {
     uint8_t curr_sym = 0;
     uint16_t curr_code = 0;
     uint16_t next_code = START_CODE;
-    //main loop from pseudocode
     while (read_pair(infile, &curr_code, &curr_sym, (uint16_t) log2(next_code) + 1)) {
         table[next_code] = word_append_sym(table[curr_code], curr_sym);
         write_word(outfile, table[next_code]);
